@@ -1,0 +1,832 @@
+﻿@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    #RegisterValidation > div > div.card-footer.text-right > button {
+        background-color: #141E30;
+    }
+
+    nav-pills .nav-item .nav-link, .nav-pills .nav-item .nav-link:hover {
+        background-color: #141e30;
+        color: #fff !important;
+    }
+    #more {display: none;}
+</style>
+<div class="panel-header panel-header-sm">
+    @*<div class="header text-center">
+        <h5 class="title">Create Applicant</h5>
+        <p class="category">Advanced Add Student</p>
+    </div>*@
+</div>
+<div class="content">
+    <div class="col-md-10 mr-auto ml-auto">
+        <div class="wizard-container">
+            <div class="card card-wizard active" data-color="primary" id="wizardProfile">
+                <form method="post" asp-controller="Student" asp-action="Create" enctype="multipart/form-data">
+                <div class="card-header text-center" style="background-color:#141E30">
+                    <h3 class="card-title" style="color:#fff">
+                        Register Applicant
+                    </h3>
+                    <h3 class="description">This information will let us know more about you.</h3>
+                        <div class="wizard-navigation">
+                            <ul class="nav nav-pills">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#year" data-toggle="tab" role="tab" aria-controls="year" aria-selected="true">
+                                        <i class="now-ui-icons ui-1_calendar-60"></i>
+                                        Year
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#account" data-toggle="tab" role="tab" aria-controls="account" aria-selected="true">
+                                        <i class="now-ui-icons education_hat"></i>
+                                        Study
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#about" data-toggle="tab" role="tab" aria-controls="about" aria-selected="true">
+                                        <i class="now-ui-icons users_circle-08"></i>
+                                        Personal
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#address" data-toggle="tab" role="tab" aria-controls="address" aria-selected="true">
+                                        <i class="now-ui-icons ui-1_email-85"></i>
+                                        Address
+                                    </a>
+                                </li>
+                                @*<li class="nav-item">
+                                    <a class="nav-link" href="#programme" data-toggle="tab" role="tab" aria-controls="programme" aria-selected="true">
+                                        <i class="now-ui-icons files_paper"></i>
+                                        Programme
+                                    </a>
+                                </li>*@
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#done" data-toggle="tab" role="tab" aria-controls="done" aria-selected="true">
+                                        <i class="now-ui-icons ui-2_like"></i>
+                                        Done
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane show active" id="year">
+                                <h5 class="info-text"> Academic Year </h5>
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-10">
+                                        <div class="row input-group form-control-lg">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="now-ui-icons ui-1_calendar-60"></i>
+                                                </div>
+                                            </div>
+                                            <select class="form-control" data-size="7" data-style="btn btn-primary btn-round" name="AcademicYear" title="AcademicYear" required="true">
+                                                <option disabled selected value="select-year">-- select academic year --</option>
+                                                <option value="2023/2024">2023/2024 - Semester 1</option>
+                                                <option value="2022/2023">2022/2023 - Semester 1</option>
+                                                <option value="2021/2022">2021/2022 - Semester 1</option>
+                                                <option value="2020/2021">2020/2021 - Semester 1</option>
+                                                <option value="2019/2020">2019/2020 - Semester 1</option>
+                                                <option value="2018/2019">2018/2019 - Semester 1</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="account">
+                                <h5 class="info-text"> Application Type </h5>
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-10">
+                                        <div class="row input-group form-control-lg">
+                                            <div class="col-sm-3">
+                                                <div class="choice" data-toggle="wizard-radio">
+                                                    <input type="radio" class="form-control" name="Type" value="Diploma" required>
+                                                    <div class="icon">
+                                                        <i class="now-ui-icons education_hat"></i>
+                                                    </div>
+                                                    <h6>Diploma</h6>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="choice" data-toggle="wizard-radio">
+                                                    <input type="radio" class="form-control" name="Type" value="Undergraduate" required>
+                                                    <div class="icon">
+                                                        <i class="now-ui-icons education_hat"></i>
+                                                    </div>
+                                                    <h6>Undergraduate</h6>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="choice" data-toggle="wizard-radio">
+                                                    <input type="radio" class="form-control" name="Type" value="Masters" required>
+                                                    <div class="icon">
+                                                        <i class="now-ui-icons education_hat"></i>
+                                                    </div>
+                                                    <h6>Masters</h6>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="choice" data-toggle="wizard-radio">
+                                                    <input type="radio" class="form-control" name="Type" value="Doctorate" required>
+                                                    <div class="icon">
+                                                        <i class="now-ui-icons education_hat"></i>
+                                                    </div>
+                                                    <h6>PhD</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="about">
+                                <h5 class="info-text">Personal Details</h5>
+                                <div class="row justify-content-center">
+                                    <div class="col-sm-4 mb-3">
+                                        <div class="picture-container">
+                                            <div class="picture input-group form-control-lg">
+                                                <img src="../../assets/img/default-avatar.png" class="picture-src" id="wizardPicturePreview" />
+                                                <input type="file" name="PassportImage" id="wizard-picture" required="true">
+                                            </div>
+                                            <h6 class="description">Choose Picture</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="input-group form-control-lg">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="now-ui-icons sport_user-run"></i>
+                                                </div>
+                                            </div>
+                                            <select class="form-control" data-size="7" data-style="btn btn-primary btn-round" id="Gender" name="Gender" title="Gender" required="true">
+                                                <option disabled selected value="select-gender">-- select Gender --</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-group form-control-lg mt-3">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="now-ui-icons users_circle-08"></i>
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Surname" name="Surname" required="true" />
+                                        </div>
+                                        <div class="input-group form-control-lg mt-3">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="now-ui-icons users_circle-08"></i>
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Other Names" name="OtherNames" required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 mb-1">
+                                        <div class="input-group form-control-lg">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="now-ui-icons users_circle-08"></i>
+                                                </div>
+                                            </div>
+                                            @*<input type="text" class="form-control" placeholder="Title" name="Title" required="true" />*@
+                                            <select class="form-control" data-size="7" data-style="btn btn-primary btn-round" id="Title" name="Title" title="Title" required="true">
+                                                <option disabled selected value="select-title">-- select title --</option>
+                                                <option value="Mr">Mr</option>
+                                                <option value="Mrs">Mrs</option>
+                                                <option value="Miss">Miss</option>
+                                                <option value="Rev">Rev</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 my-1">
+                                        <div class="input-group form-control-lg">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="now-ui-icons ui-1_email-85"></i>
+                                                </div>
+                                            </div>
+                                            <input type="email" placeholder="School Email" class="form-control" name="SchoolEmail" email="true" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 my-1">
+                                        <div class="input-group form-control-lg">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="now-ui-icons ui-1_calendar-60"></i>
+                                                </div>
+                                            </div>
+                                            <input style="padding-right: 50px" type="text" placeholder="Birth Date" onfocus="(this.type='date')" max="2010-01-01" class="form-control" name="BirthDate" required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 my-1">
+                                        <div class="input-group form-control-lg">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="now-ui-icons tech_mobile"></i>
+                                                </div>
+                                            </div>
+                                            <input type="tel" class="form-control" placeholder="Primary Mobile No" name="PrimaryMobileNo" required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 my-1">
+                                        <div class="input-group form-control-lg">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="now-ui-icons tech_mobile"></i>
+                                                </div>
+                                            </div>
+                                            <input type="tel" class="form-control" placeholder="Knust Mobile No" name="KnustmobileNo" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 my-1">
+                                        <div class="input-group form-control-lg">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="now-ui-icons tech_mobile"></i>
+                                                </div>
+                                            </div>
+                                            <input type="tel" class="form-control" placeholder="Other Mobile No" name="OtherPhoneNo" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 my-1">
+                                        <div class="input-group form-control-lg">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="now-ui-icons location_pin"></i>
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Region" name="Region" required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 my-1">
+                                        <div class="input-group form-control-lg">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="now-ui-icons location_world"></i>
+                                                </div>
+                                            </div>
+                                            <select class="form-control" data-size="7" data-style="btn btn-primary btn-round" name="country" title="country" required="true">
+                                                <option disabled selected value="select-country">-- select Country --</option>
+                                                <option value="Afghanistan">Afghanistan</option>
+                                                <option value="Åland Islands">Åland Islands</option>
+                                                <option value="Albania">Albania</option>
+                                                <option value="Algeria">Algeria</option>
+                                                <option value="American Samoa">American Samoa</option>
+                                                <option value="Andorra">Andorra</option>
+                                                <option value="Angola">Angola</option>
+                                                <option value="Anguilla">Anguilla</option>
+                                                <option value="Antarctica">Antarctica</option>
+                                                <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                                                <option value="Argentina">Argentina</option>
+                                                <option value="Armenia">Armenia</option>
+                                                <option value="Aruba">Aruba</option>
+                                                <option value="Australia">Australia</option>
+                                                <option value="Austria">Austria</option>
+                                                <option value="Azerbaijan">Azerbaijan</option>
+                                                <option value="Bahamas">Bahamas</option>
+                                                <option value="Bahrain">Bahrain</option>
+                                                <option value="Bangladesh">Bangladesh</option>
+                                                <option value="Barbados">Barbados</option>
+                                                <option value="Belarus">Belarus</option>
+                                                <option value="Belgium">Belgium</option>
+                                                <option value="Belize">Belize</option>
+                                                <option value="Benin">Benin</option>
+                                                <option value="Bermuda">Bermuda</option>
+                                                <option value="Bhutan">Bhutan</option>
+                                                <option value="Bolivia">Bolivia</option>
+                                                <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                                                <option value="Botswana">Botswana</option>
+                                                <option value="Bouvet Island">Bouvet Island</option>
+                                                <option value="Brazil">Brazil</option>
+                                                <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+                                                <option value="Brunei Darussalam">Brunei Darussalam</option>
+                                                <option value="Bulgaria">Bulgaria</option>
+                                                <option value="Burkina Faso">Burkina Faso</option>
+                                                <option value="Burundi">Burundi</option>
+                                                <option value="Cambodia">Cambodia</option>
+                                                <option value="Cameroon">Cameroon</option>
+                                                <option value="Canada">Canada</option>
+                                                <option value="Cape Verde">Cape Verde</option>
+                                                <option value="Cayman Islands">Cayman Islands</option>
+                                                <option value="Central African Republic">Central African Republic</option>
+                                                <option value="Chad">Chad</option>
+                                                <option value="Chile">Chile</option>
+                                                <option value="China">China</option>
+                                                <option value="Christmas Island">Christmas Island</option>
+                                                <option value="Cocos (Keeling) Islands">Cocos (Keeling) Islands</option>
+                                                <option value="Colombia">Colombia</option>
+                                                <option value="Comoros">Comoros</option>
+                                                <option value="Congo">Congo</option>
+                                                <option value="Congo, The Democratic Republic of The">Congo, The Democratic Republic of The</option>
+                                                <option value="Cook Islands">Cook Islands</option>
+                                                <option value="Costa Rica">Costa Rica</option>
+                                                <option value="Cote D'ivoire">Cote D'ivoire</option>
+                                                <option value="Croatia">Croatia</option>
+                                                <option value="Cuba">Cuba</option>
+                                                <option value="Cyprus">Cyprus</option>
+                                                <option value="Czech Republic">Czech Republic</option>
+                                                <option value="Denmark">Denmark</option>
+                                                <option value="Djibouti">Djibouti</option>
+                                                <option value="Dominica">Dominica</option>
+                                                <option value="Dominican Republic">Dominican Republic</option>
+                                                <option value="Ecuador">Ecuador</option>
+                                                <option value="Egypt">Egypt</option>
+                                                <option value="El Salvador">El Salvador</option>
+                                                <option value="Equatorial Guinea">Equatorial Guinea</option>
+                                                <option value="Eritrea">Eritrea</option>
+                                                <option value="Estonia">Estonia</option>
+                                                <option value="Ethiopia">Ethiopia</option>
+                                                <option value="Falkland Islands (Malvinas)">Falkland Islands (Malvinas)</option>
+                                                <option value="Faroe Islands">Faroe Islands</option>
+                                                <option value="Fiji">Fiji</option>
+                                                <option value="Finland">Finland</option>
+                                                <option value="France">France</option>
+                                                <option value="French Guiana">French Guiana</option>
+                                                <option value="French Polynesia">French Polynesia</option>
+                                                <option value="French Southern Territories">French Southern Territories</option>
+                                                <option value="Gabon">Gabon</option>
+                                                <option value="Gambia">Gambia</option>
+                                                <option value="Georgia">Georgia</option>
+                                                <option value="Germany">Germany</option>
+                                                <option value="Ghana">Ghana</option>
+                                                <option value="Gibraltar">Gibraltar</option>
+                                                <option value="Greece">Greece</option>
+                                                <option value="Greenland">Greenland</option>
+                                                <option value="Grenada">Grenada</option>
+                                                <option value="Guadeloupe">Guadeloupe</option>
+                                                <option value="Guam">Guam</option>
+                                                <option value="Guatemala">Guatemala</option>
+                                                <option value="Guernsey">Guernsey</option>
+                                                <option value="Guinea">Guinea</option>
+                                                <option value="Guinea-bissau">Guinea-bissau</option>
+                                                <option value="Guyana">Guyana</option>
+                                                <option value="Haiti">Haiti</option>
+                                                <option value="Heard Island and Mcdonald Islands">Heard Island and Mcdonald Islands</option>
+                                                <option value="Holy See (Vatican City State)">Holy See (Vatican City State)</option>
+                                                <option value="Honduras">Honduras</option>
+                                                <option value="Hong Kong">Hong Kong</option>
+                                                <option value="Hungary">Hungary</option>
+                                                <option value="Iceland">Iceland</option>
+                                                <option value="India">India</option>
+                                                <option value="Indonesia">Indonesia</option>
+                                                <option value="Iran, Islamic Republic of">Iran, Islamic Republic of</option>
+                                                <option value="Iraq">Iraq</option>
+                                                <option value="Ireland">Ireland</option>
+                                                <option value="Isle of Man">Isle of Man</option>
+                                                <option value="Israel">Israel</option>
+                                                <option value="Italy">Italy</option>
+                                                <option value="Jamaica">Jamaica</option>
+                                                <option value="Japan">Japan</option>
+                                                <option value="Jersey">Jersey</option>
+                                                <option value="Jordan">Jordan</option>
+                                                <option value="Kazakhstan">Kazakhstan</option>
+                                                <option value="Kenya">Kenya</option>
+                                                <option value="Kiribati">Kiribati</option>
+                                                <option value="Korea, Democratic People's Republic of">Korea, Democratic People's Republic of</option>
+                                                <option value="Korea, Republic of">Korea, Republic of</option>
+                                                <option value="Kuwait">Kuwait</option>
+                                                <option value="Kyrgyzstan">Kyrgyzstan</option>
+                                                <option value="Lao People's Democratic Republic">Lao People's Democratic Republic</option>
+                                                <option value="Latvia">Latvia</option>
+                                                <option value="Lebanon">Lebanon</option>
+                                                <option value="Lesotho">Lesotho</option>
+                                                <option value="Liberia">Liberia</option>
+                                                <option value="Libyan Arab Jamahiriya">Libyan Arab Jamahiriya</option>
+                                                <option value="Liechtenstein">Liechtenstein</option>
+                                                <option value="Lithuania">Lithuania</option>
+                                                <option value="Luxembourg">Luxembourg</option>
+                                                <option value="Macao">Macao</option>
+                                                <option value="Macedonia, The Former Yugoslav Republic of">Macedonia, The Former Yugoslav Republic of</option>
+                                                <option value="Madagascar">Madagascar</option>
+                                                <option value="Malawi">Malawi</option>
+                                                <option value="Malaysia">Malaysia</option>
+                                                <option value="Maldives">Maldives</option>
+                                                <option value="Mali">Mali</option>
+                                                <option value="Malta">Malta</option>
+                                                <option value="Marshall Islands">Marshall Islands</option>
+                                                <option value="Martinique">Martinique</option>
+                                                <option value="Mauritania">Mauritania</option>
+                                                <option value="Mauritius">Mauritius</option>
+                                                <option value="Mayotte">Mayotte</option>
+                                                <option value="Mexico">Mexico</option>
+                                                <option value="Micronesia, Federated States of">Micronesia, Federated States of</option>
+                                                <option value="Moldova, Republic of">Moldova, Republic of</option>
+                                                <option value="Monaco">Monaco</option>
+                                                <option value="Mongolia">Mongolia</option>
+                                                <option value="Montenegro">Montenegro</option>
+                                                <option value="Montserrat">Montserrat</option>
+                                                <option value="Morocco">Morocco</option>
+                                                <option value="Mozambique">Mozambique</option>
+                                                <option value="Myanmar">Myanmar</option>
+                                                <option value="Namibia">Namibia</option>
+                                                <option value="Nauru">Nauru</option>
+                                                <option value="Nepal">Nepal</option>
+                                                <option value="Netherlands">Netherlands</option>
+                                                <option value="Netherlands Antilles">Netherlands Antilles</option>
+                                                <option value="New Caledonia">New Caledonia</option>
+                                                <option value="New Zealand">New Zealand</option>
+                                                <option value="Nicaragua">Nicaragua</option>
+                                                <option value="Niger">Niger</option>
+                                                <option value="Nigeria">Nigeria</option>
+                                                <option value="Niue">Niue</option>
+                                                <option value="Norfolk Island">Norfolk Island</option>
+                                                <option value="Northern Mariana Islands">Northern Mariana Islands</option>
+                                                <option value="Norway">Norway</option>
+                                                <option value="Oman">Oman</option>
+                                                <option value="Pakistan">Pakistan</option>
+                                                <option value="Palau">Palau</option>
+                                                <option value="Palestinian Territory, Occupied">Palestinian Territory, Occupied</option>
+                                                <option value="Panama">Panama</option>
+                                                <option value="Papua New Guinea">Papua New Guinea</option>
+                                                <option value="Paraguay">Paraguay</option>
+                                                <option value="Peru">Peru</option>
+                                                <option value="Philippines">Philippines</option>
+                                                <option value="Pitcairn">Pitcairn</option>
+                                                <option value="Poland">Poland</option>
+                                                <option value="Portugal">Portugal</option>
+                                                <option value="Puerto Rico">Puerto Rico</option>
+                                                <option value="Qatar">Qatar</option>
+                                                <option value="Reunion">Reunion</option>
+                                                <option value="Romania">Romania</option>
+                                                <option value="Russian Federation">Russian Federation</option>
+                                                <option value="Rwanda">Rwanda</option>
+                                                <option value="Saint Helena">Saint Helena</option>
+                                                <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                                                <option value="Saint Lucia">Saint Lucia</option>
+                                                <option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option>
+                                                <option value="Saint Vincent and The Grenadines">Saint Vincent and The Grenadines</option>
+                                                <option value="Samoa">Samoa</option>
+                                                <option value="San Marino">San Marino</option>
+                                                <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                                                <option value="Saudi Arabia">Saudi Arabia</option>
+                                                <option value="Senegal">Senegal</option>
+                                                <option value="Serbia">Serbia</option>
+                                                <option value="Seychelles">Seychelles</option>
+                                                <option value="Sierra Leone">Sierra Leone</option>
+                                                <option value="Singapore">Singapore</option>
+                                                <option value="Slovakia">Slovakia</option>
+                                                <option value="Slovenia">Slovenia</option>
+                                                <option value="Solomon Islands">Solomon Islands</option>
+                                                <option value="Somalia">Somalia</option>
+                                                <option value="South Africa">South Africa</option>
+                                                <option value="South Georgia and The South Sandwich Islands">South Georgia and The South Sandwich Islands</option>
+                                                <option value="Spain">Spain</option>
+                                                <option value="Sri Lanka">Sri Lanka</option>
+                                                <option value="Sudan">Sudan</option>
+                                                <option value="Suriname">Suriname</option>
+                                                <option value="Svalbard and Jan Mayen">Svalbard and Jan Mayen</option>
+                                                <option value="Swaziland">Swaziland</option>
+                                                <option value="Sweden">Sweden</option>
+                                                <option value="Switzerland">Switzerland</option>
+                                                <option value="Syrian Arab Republic">Syrian Arab Republic</option>
+                                                <option value="Taiwan">Taiwan</option>
+                                                <option value="Tajikistan">Tajikistan</option>
+                                                <option value="Tanzania, United Republic of">Tanzania, United Republic of</option>
+                                                <option value="Thailand">Thailand</option>
+                                                <option value="Timor-leste">Timor-leste</option>
+                                                <option value="Togo">Togo</option>
+                                                <option value="Tokelau">Tokelau</option>
+                                                <option value="Tonga">Tonga</option>
+                                                <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                                                <option value="Tunisia">Tunisia</option>
+                                                <option value="Turkey">Turkey</option>
+                                                <option value="Turkmenistan">Turkmenistan</option>
+                                                <option value="Turks and Caicos Islands">Turks and Caicos Islands</option>
+                                                <option value="Tuvalu">Tuvalu</option>
+                                                <option value="Uganda">Uganda</option>
+                                                <option value="Ukraine">Ukraine</option>
+                                                <option value="United Arab Emirates">United Arab Emirates</option>
+                                                <option value="United Kingdom">United Kingdom</option>
+                                                <option value="United States">United States</option>
+                                                <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
+                                                <option value="Uruguay">Uruguay</option>
+                                                <option value="Uzbekistan">Uzbekistan</option>
+                                                <option value="Vanuatu">Vanuatu</option>
+                                                <option value="Venezuela">Venezuela</option>
+                                                <option value="Viet Nam">Viet Nam</option>
+                                                <option value="Virgin Islands, British">Virgin Islands, British</option>
+                                                <option value="Virgin Islands, U.S.">Virgin Islands, U.S.</option>
+                                                <option value="Wallis and Futuna">Wallis and Futuna</option>
+                                                <option value="Western Sahara">Western Sahara</option>
+                                                <option value="Yemen">Yemen</option>
+                                                <option value="Zambia">Zambia</option>
+                                                <option value="Zimbabwe">Zimbabwe</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 my-1">
+                                        <div class="input-group form-control-lg">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="now-ui-icons ui-1_email-85"></i>
+                                                </div>
+                                            </div>
+                                            <input type="email" placeholder="Other Email" class="form-control" name="OtherEmail" email="true" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 my-1">
+                                        <div class="input-group form-control-lg">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="now-ui-icons  travel_istanbul"></i>
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Religion" name="Religion" required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-10 my-1">
+                                        <div class="input-group form-control-lg">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="now-ui-icons  travel_istanbul"></i>
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Denomination" name="Denomination" required="true" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="address">
+                                <div class="row justify-content-center">
+                                    <div class="col-sm-12">
+                                        <h5 class="info-text"> Address Information </h5>
+                                    </div>
+                                    <div class="col-sm-5 my-1">
+                                        <div class="input-group form-control-lg">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="now-ui-icons location_pin"></i>
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Residential Address 1" name="ResidentialAddress1" required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5 my-1">
+                                        <div class="input-group form-control-lg">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="now-ui-icons location_pin"></i>
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Residential Address 2" name="ResidentialAddress2" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5 my-1">
+                                        <div class="input-group form-control-lg">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="now-ui-icons location_pin"></i>
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Residential Address 3" name="ResidentialAddress3" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5 my-1">
+                                        <div class="input-group form-control-lg">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="now-ui-icons location_pin"></i>
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Residential Address 4" name="ResidentialAddress4" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5 my-1">
+                                        <div class="input-group form-control-lg">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="now-ui-icons location_pin"></i>
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Postal Address 1" name="PostalAddress1" required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5 my-1">
+                                        <div class="input-group form-control-lg">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="now-ui-icons location_pin"></i>
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Postal Address 2" name="PostalAddress2" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5 my-1">
+                                        <div class="input-group form-control-lg">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="now-ui-icons location_pin"></i>
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Postal Address 3" name="PostalAddress3" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5 my-1">
+                                        <div class="input-group form-control-lg">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="now-ui-icons location_pin"></i>
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Postal Address 4" name="PostalAddress4" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="done">
+                                <div class="row justify-content-center">
+                                    <div class="col-sm-12">
+                                        <h5 class="info-text">Policy Agreement</h5>
+                                    </div>
+                                    <div class="col-sm-10 text-justify">
+                                        <p>At Student File System, accessible from SFS, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Student File System and how we use it.</p>
+
+                                        <p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.</p>
+
+                                        <p>This Privacy Policy applies only to our online activities and is valid for visitors to our website with regards to the information that they shared and/or collect in Student File System. This policy is not applicable to any information collected offline or via channels other than this website.</p>
+                                        <span id="dots">...</span>
+                                        <span id="more">
+                                            <h5>Consent</h5>
+
+                                            <p>By using our website, you hereby consent to our Privacy Policy and agree to its terms.</p>
+
+                                            <h5>Information we collect</h5>
+
+                                            <p>The personal information that you are asked to provide, and the reasons why you are asked to provide it, will be made clear to you at the point we ask you to provide your personal information.</p>
+                                            <p>If you contact us directly, we may receive additional information about you such as your name, email address, phone number, the contents of the message and/or attachments you may send us, and any other information you may choose to provide.</p>
+                                            <p>When you register for an Account, we may ask for your contact information, including items such as name, company name, address, email address, and telephone number.</p>
+
+                                            <h5>How we use your information</h5>
+
+                                            <p>We use the information we collect in various ways, including to:</p>
+
+                                            <ul>
+                                                <li>Provide, operate, and maintain our website</li>
+                                                <li>Improve, personalize, and expand our website</li>
+                                                <li>Understand and analyze how you use our website</li>
+                                                <li>Develop new products, services, features, and functionality</li>
+                                                <li>Communicate with you, either directly or through one of our partners, including for customer service, to provide you with updates and other information relating to the website, and for marketing and promotional purposes</li>
+                                                <li>Send you emails</li>
+                                                <li>Find and prevent fraud</li>
+                                            </ul>
+
+                                            <h5>Log Files</h5>
+
+                                            <p>Student File System follows a standard procedure of using log files. These files log visitors when they visit websites. All hosting companies do this and a part of hosting services' analytics. The information collected by log files include internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends, administering the site, tracking users' movement on the website, and gathering demographic information.</p>
+
+                                            <h5>Cookies and Web Beacons</h5>
+
+                                            <p>Like any other website, Student File System uses "cookies". These cookies are used to store information including visitors' preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users' experience by customizing our web page content based on visitors' browser type and/or other information.</p>
+
+
+
+                                            <h5>Advertising Partners Privacy Policies</h5>
+
+                                            <P>You may consult this list to find the Privacy Policy for each of the advertising partners of Student File System.</P>
+
+                                            <p>Third-party ad servers or ad networks uses technologies like cookies, JavaScript, or Web Beacons that are used in their respective advertisements and links that appear on Student File System, which are sent directly to users' browser. They automatically receive your IP address when this occurs. These technologies are used to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on websites that you visit.</p>
+
+                                            <p>Note that Student File System has no access to or control over these cookies that are used by third-party advertisers.</p>
+
+                                            <h5>Third Party Privacy Policies</h5>
+
+                                            <p>Student File System's Privacy Policy does not apply to other advertisers or websites. Thus, we are advising you to consult the respective Privacy Policies of these third-party ad servers for more detailed information. It may include their practices and instructions about how to opt-out of certain options. </p>
+
+                                            <p>You can choose to disable cookies through your individual browser options. To know more detailed information about cookie management with specific web browsers, it can be found at the browsers' respective websites.</p>
+
+                                            <h5>CCPA Privacy Rights (Do Not Sell My Personal Information)</h5>
+
+                                            <p>Under the CCPA, among other rights, California consumers have the right to:</p>
+                                            <p>Request that a business that collects a consumer's personal data disclose the categories and specific pieces of personal data that a business has collected about consumers.</p>
+                                            <p>Request that a business delete any personal data about the consumer that a business has collected.</p>
+                                            <p>Request that a business that sells a consumer's personal data, not sell the consumer's personal data.</p>
+                                            <p>If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us.</p>
+
+                                            <h5>GDPR Data Protection Rights</h5>
+
+                                            <p>We would like to make sure you are fully aware of all of your data protection rights. Every user is entitled to the following:</p>
+                                            <p>The right to access – You have the right to request copies of your personal data. We may charge you a small fee for this service.</p>
+                                            <p>The right to rectification – You have the right to request that we correct any information you believe is inaccurate. You also have the right to request that we complete the information you believe is incomplete.</p>
+                                            <p>The right to erasure – You have the right to request that we erase your personal data, under certain conditions.</p>
+                                            <p>The right to restrict processing – You have the right to request that we restrict the processing of your personal data, under certain conditions.</p>
+                                            <p>The right to object to processing – You have the right to object to our processing of your personal data, under certain conditions.</p>
+                                            <p>The right to data portability – You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.</p>
+                                            <p>If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us.</p>
+
+                                            <h5>Children's Information</h5>
+
+                                            <p>Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity.</p>
+
+                                            <p>Student File System does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.</p>
+
+                                            <h5>Changes to This Privacy Policy</h5>
+
+                                            <p>We may update our Privacy Policy from time to time. Thus, we advise you to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page. These changes are effective immediately, after they are posted on this page.</p>
+
+                                            <p>Our Privacy Policy was created with the help of the <a href="https://www.privacypolicygenerator.info">Privacy Policy Generator</a>.</p>
+
+                                            <h5>Contact Us</h5>
+
+                                            <p>If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us.</p>
+                                            </span>
+                                            <a href="#" onclick="myFunction()" id="myBtn">Read more</a>
+                                            <div class="form-check mt-3 input-group form-control-lg">
+                                            <label class="form-check-label">
+                                            <input class="form-check-input form-control" name="agree" type="checkbox" required="true">
+                                            <span class="form-check-sign"></span>
+                                            I agree to the terms and conditions statement
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="pull-right">
+                            <input type="button" class="btn btn-next btn-fill btn-rose btn-wd" name="next" value="Next" />
+                            <input type="submit" class="btn btn-finish btn-fill btn-rose btn-wd" name="finish" value="Finish" />
+                        </div>
+                        <div class="pull-left">
+                            <input type="button" class="btn btn-previous btn-fill btn-default btn-wd" name="previous" value="Previous" />
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.card.card-wizard').addClass('active');
+        // Initialise the wizard when DomContent
+        demo.initNowUiWizard();
+    });
+
+    $("#Gender").change(function () {
+        var value = $("#Gender :selected").val();
+        console.log(value);
+        switch(value) {
+            case "Male":
+                $("option[value='Mrs']").hide();
+                $("option[value='Miss']").hide();
+                $("option[value='Mr']").show();
+                $("option[value='Rev']").show();
+            break;
+          case "Female":
+                $("option[value='Mrs']").show();
+                $("option[value='Miss']").show();
+                $("option[value='Mr']").hide();
+                $("option[value='Rev']").show();
+            break;
+          default:
+            // code block
+        }
+    })
+
+        $("#Title").change(function () {
+        var value = $("#Title :selected").val();
+        console.log(value);
+        switch(value) {
+            case "Mr":
+                $("option[value='Female']").hide();
+                $("option[value='Male']").show();
+            break;
+          case "Mrs":
+                $("option[value='Female']").show();
+                $("option[value='Male']").hide();
+            break;
+          case "Miss":
+                $("option[value='Female']").show();
+                $("option[value='Male']").hide();
+            break;
+          case "Rev":
+                $("option[value='Male']").show();
+                $("option[value='Female']").show();
+            break;
+          default:
+            // code block
+        }
+    })
+
+    function myFunction() {
+      var dots = document.getElementById("dots");
+      var moreText = document.getElementById("more");
+      var btnText = document.getElementById("myBtn");
+
+      if (dots.style.display === "none") {
+        dots.style.display = "inline";
+        btnText.innerHTML = "Read more";
+        moreText.style.display = "none";
+      } else {
+        dots.style.display = "none";
+        btnText.innerHTML = "Read less";
+        moreText.style.display = "inline";
+      }
+    }
+
+</script>

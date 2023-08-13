@@ -1,0 +1,93 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-pic js-tilt" data-tilt>
+                <img src="~/images/img-01.png" alt="IMG">
+            </div>
+            <form id="account" method="post" class="login100-form validate-form">
+                <span class="login100-form-title">
+                    @ViewData["Title"]
+                </span>
+                <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                    <input asp-for="Input.Email" class="input100" type="text" placeholder="Email" />
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+
+                <div class="wrap-input100 validate-input" data-validate="Password is required">
+                    <input asp-for="Input.Password" type="password" class="input100" placeholder="Password" />
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+
+                <div class="txt2 text-danger text-left" asp-validation-summary="All"></div>
+                @*<div class="form-group">
+                        <div class="checkbox">
+                            <label asp-for="Input.RememberMe">
+                                <input asp-for="Input.RememberMe" />
+                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            </label>
+                        </div>
+                    </div>*@
+                <div class="container-login100-form-btn">
+                    <button type="submit" class="login100-form-btn">Log in</button>
+                </div>
+                <div class="text-center p-t-12">
+                    <span class="txt1">
+                        <a class="txt2" id="forgot-password" asp-page="./ForgotPassword">Forgot</a>
+                    </span>
+                    <a id="forgot-password" asp-page="./ForgotPassword">Username / Password?</a>
+                </div>
+                <div class="text-center p-t-136">
+                    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i></a>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+
+<section>
+
+    @{
+        if ((Model.ExternalLogins?.Count ?? 0) == 0)
+        {
+            @*<div>
+                    <p>
+                        There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                        for details on setting up this ASP.NET application to support logging in via external services.
+                    </p>
+                </div>*@
+        }
+        else
+        {
+            <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                <div>
+                    <p>
+                        @foreach (var provider in Model.ExternalLogins)
+                        {
+                            <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                        }
+                    </p>
+                </div>
+            </form>
+        }
+    }
+
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

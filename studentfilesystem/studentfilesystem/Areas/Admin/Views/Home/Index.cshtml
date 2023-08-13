@@ -1,0 +1,180 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@model IEnumerable<studentfilesystem.Models.Application> 
+@{
+    ViewData["Title"] = "Index";
+
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+ }
+<div class="panel-header panel-header-sm">
+</div>
+<div class="content">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <h5 class="card-category">Total Applicants</h5>
+                    <h4 class="card-title counter">@ViewBag.All</h4>
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
+                            <i class="now-ui-icons loader_gear"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item text-danger" href="#">Remove Data</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @*<div class="chart-area">
+                            <canvas id="lineChartExample"></canvas>
+                        </div>*@
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="now-ui-icons arrows-1_refresh-69"></i> Just Updated
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <h5 class="card-category">Document Upload Applicants</h5>
+                    <h4 class="card-title counter">
+                        @ViewBag.DocUpload
+                    </h4>
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
+                            <i class="now-ui-icons loader_gear"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item text-danger" href="#">Remove Data</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @*<div class="chart-area">
+                            <canvas id="linechartexamplewithnumbersandgrid"></canvas>
+                        </div>*@
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="now-ui-icons arrows-1_refresh-69"></i> Just Updated
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <h5 class="card-category">Programme Upload</h5>
+                    <h4 class="card-title counter">@ViewBag.ProgramUpload</h4>
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
+                            <i class="now-ui-icons loader_gear"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item text-danger" href="#">Remove Data</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="now-ui-icons ui-2_time-alarm"></i> Last 7 days
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-category">All Applicants</h5>
+                <h4 class="card-title">Overview</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="applicants">
+                        <thead class=" text-primary">
+                            <tr>
+                                <th>
+                                    Appl ID
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Degree
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Academic Year
+                                </th>
+                                <th>
+                                    Actions
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var appl in Model) {
+                            <tr>
+                                <td>
+                                    @appl.ApplicationId
+                                </td>
+                                <td>
+                                    @appl.Surname @appl.OtherNames
+                                </td>
+                                <td>
+                                    @appl.Type
+                                </td>
+                                <td class="text-info">
+                                    @(@appl.Status == 0 ? "Programme Selection" : (@appl.Status == 1 ? "Document Upload" : "Submitted"))
+                                </td>
+                                <td>
+                                    @appl.AcademicYear
+                                </td>
+                                <td class="text-right">
+                                    <a asp-area="Admin" asp-controller="Student" asp-action="StudentMenu" asp-route-id="@appl.ApplicationId" class="btn btn-round btn-info btn-icon btn-sm like"><i class="now-ui-icons users_single-02"></i></a>
+                                    @*<a asp-area="Admin" asp-controller="Student" asp-action="StudentMenu" asp-route-appid="@appl.ApplicationId" class="btn btn-round btn-warning btn-icon btn-sm edit"><i class="far fa-calendar-alt"></i></a>*@
+                                    <button class="btn btn-round btn-danger btn-icon btn-sm remove" id="@appl.ApplicationId"><i class="fa fa-times"></i></button>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function ($) {
+        "use strict";
+        /*----------------------------
+     counterUp js active
+    ------------------------------ */
+        $('.counter').counterUp({
+            delay: 10,
+            time: 1000
+        });
+
+    })(jQuery);
+</script>
+
+

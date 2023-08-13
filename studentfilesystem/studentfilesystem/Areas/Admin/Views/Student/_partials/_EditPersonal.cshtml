@@ -1,0 +1,227 @@
+﻿<div class="modal fade" id="edit-personal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notice">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="now-ui-icons ui-1_simple-remove"></i>
+                </button>
+                <h4 class="title title-up">Select/Edit Personal Details</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-controller="Student" asp-action="EditPersonal" asp-route-id="@Model.ApplicationId" enctype="multipart/form-data">
+                    <div class="card-wizard active" data-color="primary" id="wizardProfile">
+                        <div class="picture-container">
+                            <div class="picture">
+                                @if (Model.PassportPath == null)
+                                {
+                                    <img src="../../../assets/img/default-avatar.png" class="picture-src" id="wizardPicturePreview" title="">
+                                }
+                                else
+                                {
+                                    <img src="@Model.PassportPath" class="picture-src" id="wizardPicturePreview" title="">
+                                }
+                                <input type="file" id="wizard-picture" value="@Model.PassportImage" name="PassportImage">
+                            </div>
+                            <h6 class="description">Choose Picture</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Surname</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control" value="@Model.ApplicationId" name="ApplicationId" hidden>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Title</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <select class="form-control" data-size="7" data-style="btn btn-primary btn-round" name="Title" title="Title" required="true" value="@Model.Title">
+                                    <option value="Mr">Mr</option>
+                                    <option value="Mrs">Mrs</option>
+                                    <option value="Miss">Miss</option>
+                                    <option value="Rev">Rev</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Surname</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control" value="@Model.Surname" name="Surname">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">OtherNames</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control" value="@Model.OtherNames" name="OtherNames">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Gender</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <select class="form-control" data-size="7" data-style="btn btn-primary btn-round" name="Gender" title="Gender" value="@Model.Gender" required="true">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Birth Date</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control" value="@Model.BirthDate" name="BirthDate">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Primary Mobile No</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control" value="@Model.PrimaryMobileNo" name="PrimaryMobileNo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Knust Mobile No</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control" value="@Model.KnustmobileNo" name="KnustmobileNo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Other Phone No</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control" value="@Model.OtherPhoneNo" name="KnustmobileNo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">SchoolEmail</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control" value="@Model.SchoolEmail" name="SchoolEmail">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">OtherPhoneNo</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control" value="@Model.OtherPhoneNo" name="OtherPhoneNo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Region</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control" value="@Model.Region" name="Region">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Country</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control" value="@Model.Country" name="Country">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Residential Address 1</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control" value="@Model.ResidentialAddress1" name="ResidentialAddress1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Residential Address 2</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control" value="@Model.ResidentialAddress2" name="ResidentialAddress2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Residential Address 3</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control" value="@Model.ResidentialAddress3" name="ResidentialAddress3">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Residential Address 4</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control" value="@Model.ResidentialAddress4" name="ResidentialAddress4">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Postal Address 1</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control" value="@Model.PostalAddress1" name="PostalAddress1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Postal Address 2</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control" value="@Model.PostalAddress2" name="PostalAddress2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Postal Address 3</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control" value="@Model.PostalAddress3" name="PostalAddress3">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Postal Address 4</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control" value="@Model.PostalAddress4" name="PostalAddress4">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Religion</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control" value="@Model.Religion" name="Religion">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Denomination</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control" value="@Model.Denomination" name="Denomination">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary float-right">Save Changes</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>

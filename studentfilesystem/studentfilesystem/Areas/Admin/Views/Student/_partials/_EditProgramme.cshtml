@@ -1,0 +1,85 @@
+﻿<div class="modal fade" id="edit-programme" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notice">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="now-ui-icons ui-1_simple-remove"></i>
+                </button>
+                <h4 class="title title-up">Select/Edit Programme</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-controller="Student" asp-action="EditProgramme" asp-route-id="@Model.ApplicationId" enctype="multipart/form-data">
+                    <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="card-body my-4 justify-center">
+                            <div class="row">
+                                <label class="col-sm-12 text-xs required">Academic Year</label>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <select class="form-control" data-size="7" data-style="btn btn-primary btn-round" value="@Model.AcademicYear" name="AcademicYear" title="AcademicYear" required="true">
+                                            <option value="2023/2024">2023/2024 - Semester 1</option>
+                                            <option value="2022/2023">2022/2023 - Semester 1</option>
+                                            <option value="2021/2022">2021/2022 - Semester 1</option>
+                                            <option value="2020/2021">2020/2021 - Semester 1</option>
+                                            <option value="2019/2020">2019/2020 - Semester 1</option>
+                                            <option value="2018/2019">2018/2019 - Semester 1</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-12 text-xs required">Academic Year</label>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <select class="form-control" data-size="7" data-style="btn btn-primary btn-round" value="@Model.Type" name="Type" title="Type" required="true">
+                                            <option value="Diploma">Diploma</option>
+                                            <option value="Undergraduate">Undergraduate</option>
+                                            <option value="Masters">Masters</option>
+                                            <option value="PhD">PhD</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-12 text-xs required">Programme Choice 1</label>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <select class="form-control" data-size="7" data-style="btn btn-primary btn-round" value="@Model.ProgrammeChoice1" name="ProgrammeChoice1" title="ProgrammeChoice1" required="true">
+                                            <option value="Mathematics">Mathematics</option>
+                                            <option value="Acturial Science">Acturial Science</option>
+                                            <option value="Agriculture">Agriculture</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-12 text-xs required">Programme Choice 2</label>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <select class="form-control" data-size="7" data-style="btn btn-primary btn-round" value="@Model.ProgrammeChoice2" name="ProgrammeChoice2" title="ProgrammeChoice2" required="true">
+                                            <option value="Mathematics">Mathematics</option>
+                                            <option value="Acturial Science">Acturial Science</option>
+                                            <option value="Agriculture">Agriculture</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-12 text-xs required">Programme Choice 3</label>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <select class="form-control" data-size="7" data-style="btn btn-primary btn-round" value="@Model.ProgrammeChoice3" name="ProgrammeChoice3" title="ProgrammeChoice3" required="true">
+                                            <option value="Mathematics">Mathematics</option>
+                                            <option value="Acturial Science">Acturial Science</option>
+                                            <option value="Agriculture">Agriculture</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary float-right">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,578 @@
+﻿@model studentfilesystem.Models.Application
+@{
+    ViewData["Title"] = "StudentMenu";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+  .required:after {
+    content:" *";
+    color: red;
+  }
+    .sec-row {
+        margin: 0px 0px 0px 0px;
+    }
+
+    .icon {
+        padding-top: 8px
+    }
+
+    /*.sec.active {
+        box-shadow: 0 5px 35px 0 rgba(0,0,0,.3);
+    }*/
+
+    .sec:hover {
+        cursor: pointer;
+        /*background-color: #141E30;*/
+        color: #ffffff;
+        border-bottom: 5px solid #141E30;
+        /*.info > .icon > .now-ui-icons
+        {
+            color: #ffffff;
+
+        }
+
+        .info > h3 > small {
+            color: #ffffff;
+        }*/
+    }
+
+    small {
+        font-size: 8pt;
+        font-weight: bold;
+    }
+
+    div.active.nav-link {
+        border-bottom: 5px solid #141E30;
+    }
+
+    div.nav-link, .card .card-body {
+        padding: 0px;
+    }
+
+    .modal-dialog {
+        max-width: 700px;
+    }
+
+    .card-wizard {
+        min-height: 0;
+        box-shadow: none;
+    }
+</style>
+<div class="panel-header panel-header-sm">
+</div>
+<div class="content">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card card-stats">
+                <div class="card-body">
+                    <div class="sec-row row nav">
+                        <div class="col-md-3 sec nav-link active" data-toggle="tab" href="#link7" role="tablist">
+                            <div class="statistics">
+                                <div class="info">
+                                    <div class="icon icon-primary">
+                                        <i class="now-ui-icons users_single-02"></i>
+                                    </div>
+                                    <h3 class="info-title"><small>PERSONAL</small></h3>
+                                    @*<h6 class="stats-title">Personal Details</h6>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 sec nav-link" data-toggle="tab" href="#link8" role="tablist">
+                            <div class="statistics">
+                                <div class="info">
+                                    <div class="icon icon-primary">
+                                        <i class="now-ui-icons education_hat"></i>
+                                    </div>
+                                    <h3 class="info-title"><small>PROGRAMME</small></h3>
+                                    @*<h6 class="stats-title">Programme Choice</h6>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 sec nav-link" data-toggle="tab" href="#link9" role="tablist">
+                            <div class="statistics">
+                                <div class="info">
+                                    <div class="icon icon-primary">
+                                        <i class="now-ui-icons files_paper"></i>
+                                    </div>
+                                    <h3 class="info-title"><small>DOCUMENTS</small></h3>
+                                    @*<h6 class="stats-title">Upload Documents</h6>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 sec nav-link" data-toggle="tab" href="#link10" role="tablist">
+                            <div class="statistics">
+                                <div class="info">
+                                    <div class="icon icon-primary">
+                                        <i class="now-ui-icons ui-1_settings-gear-63"></i>
+                                    </div>
+                                    <h3 class="info-title"><small>SETTINGS</small></h3>
+                                    @*<h6 class="stats-title">Settings</h6>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content tab-space tab-subcategories">
+                <div class="tab-pane active" id="link7">
+                    <div class="card-body">
+                        <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
+                            <button class="btn btn-primary btn-round float-right" data-toggle="modal" data-target="#edit-personal">
+                                Edit Personal Details
+                                <i class="now-ui-icons ui-2_settings-90"></i>
+                            </button>
+                            <div class="card card-plain">
+                                <div class="card-header" role="tab" id="headingOne">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Personal Information
+                                        <i class="now-ui-icons arrows-1_minimal-down"></i>
+                                    </a>
+                                </div>
+                                <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="card-body my-4 justify-center">
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">Title</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" value="@Model.Title" name="Title" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">Surname</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" value="@Model.Surname" name="Surname" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">OtherNames</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" value="@Model.OtherNames" name="OtherNames" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">Gender</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" value="@Model.Gender" name="Gender" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">Birth Date</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" value="@Model.BirthDate" name="BirthDate" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">Primary Mobile No</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" value="@Model.PrimaryMobileNo" name="PrimaryMobileNo" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">Knust Mobile No</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" value="@Model.KnustmobileNo" name="KnustmobileNo" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">SchoolEmail</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" value="@Model.SchoolEmail" name="SchoolEmail" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">OtherPhoneNo</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" value="@Model.OtherPhoneNo" name="OtherPhoneNo" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card card-plain">
+                                <div class="card-header" role="tab" id="headingTwo">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Address Information
+                                        <i class="now-ui-icons arrows-1_minimal-down"></i>
+                                    </a>
+                                </div>
+                                <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" style="">
+                                    <div class="card-body  my-4 justify-center">
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">Region</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" value="@Model.Region" name="Region" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">Country</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" value="@Model.Country" name="Country" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">Residential Address 1</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" value="@Model.ResidentialAddress1" name="ResidentialAddress1" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">Residential Address 2</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" value="@Model.ResidentialAddress2" name="ResidentialAddress2" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">Residential Address 3</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" value="@Model.ResidentialAddress3" name="ResidentialAddress3" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">Residential Address 4</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" value="@Model.ResidentialAddress4" name="ResidentialAddress4" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">Postal Address 1</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" value="@Model.PostalAddress1" name="PostalAddress1" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">Postal Address 2</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" value="@Model.PostalAddress2" name="PostalAddress2" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">Postal Address 3</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" value="@Model.PostalAddress3" name="PostalAddress3" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">Postal Address 4</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" value="@Model.PostalAddress4" name="PostalAddress4" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card card-plain">
+                                <div class="card-header" role="tab" id="headingThree">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        Religious Information
+                                        <i class="now-ui-icons arrows-1_minimal-down"></i>
+                                    </a>
+                                </div>
+                                <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="card-body  my-4 justify-center">
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">Religion</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" value="@Model.Religion" name="Religion" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">Denomination</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" value="@Model.Denomination" name="Denomination" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="link8">
+                    <div class="tab-pane active" id="link7">
+                        <div class="card-body">
+                            <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
+                                <button class="btn btn-primary btn-round float-right" data-toggle="modal" data-target="#edit-programme">
+                                    Select/Edit Programme
+                                    <i class="now-ui-icons ui-2_settings-90"></i>
+                                </button>
+                                <div class="card card-plain">
+                                    <div class="card-header" role="tab" id="headingTwo">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                            Programme Information
+                                            <i class="now-ui-icons arrows-1_minimal-down"></i>
+                                        </a>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse show" role="tabpanel" aria-labelledby="headingTwo">
+                                        <div class="card-body my-4 justify-center">
+                                            @if (Model.ProgrammeChoice1 == null || Model.ProgrammeChoice2 == null || Model.ProgrammeChoice3 == null)
+                                            {
+                                                <div class="row"><h5>No programmes Selected</h5></div>
+                                            }
+                                            else
+                                            {
+                                                <div class="row">
+                                                    <label class="col-sm-2 col-form-label">Programme Choice 1</label>
+                                                    <div class="col-sm-10">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" value="@Model.ProgrammeChoice1" disabled>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <label class="col-sm-2 col-form-label">Programme Choice 2</label>
+                                                    <div class="col-sm-10">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" value="@Model.ProgrammeChoice2" disabled>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <label class="col-sm-2 col-form-label">Programme Choice 3</label>
+                                                    <div class="col-sm-10">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" value="@Model.ProgrammeChoice3" disabled>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="link9">
+                    <div class="card-body">
+                        <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
+                            <button class="btn btn-primary btn-round float-right" data-toggle="modal" data-target="#edit-document">
+                                Upload/Edit Documents
+                                <i class="now-ui-icons ui-2_settings-90"></i>
+                            </button>
+                            <div class="card card-plain">
+                                <div class="card-header" role="tab" id="headingThree">
+                                    <a data-toggle="collapse show" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                        Programme Selection
+                                        <i class="now-ui-icons arrows-1_minimal-down"></i>
+                                    </a>
+                                </div>
+                                <div id="collapseThree" class="collapse show" role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="card-body my-4 justify-center">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <tbody>
+                                                    @foreach(var doc in ViewBag.documents){                                                    <tr>
+                                                        <td>
+                                                            @doc.Name
+                                                        </td>
+                                                        <td>
+                                                            @doc.Type
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <a href="#" class="btn btn-round btn-info btn-icon btn-sm like"><i class="now-ui-icons design-2_ruler-pencil"></i></a>
+                                                            <a href="#" class="btn btn-round btn-warning btn-icon btn-sm edit"><i class="far fa-calendar-alt"></i></a>
+                                                            <button class="btn btn-round btn-danger btn-icon btn-sm remove"><i class="fa fa-times"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        @*<div class="row"><h5>No Documents Uploaded</h5></div>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-user">
+                <div class="image">
+                    <img src="../../../assets/img/bg5.jpg" alt="...">
+                </div>
+                <div class="card-body">
+                    <div class="author">
+                        <a href="#">
+                            @*<img class="avatar border-gray" src="../../assets/img/mike.jpg" alt="...">*@
+                            @if (Model.PassportPath == null)
+                            {
+                                <img class="avatar border-gray" src="../../../assets/img/default-avatar.png" alt="...">
+                            }
+                            else
+                            {
+                                <img class="avatar border-gray" src="@Model.PassportPath" alt="...">
+                            }
+                            <h5 class="title">@Model.Surname @Model.OtherNames</h5>
+                        </a>
+                        @*<p>
+                                BSc. Chemical Engineering
+                            </p>*@
+                    </div>
+                    <div class="text-center">
+                        <div class="col">
+                            <div class="row">
+                                <label class="col-sm-4 col-form-label text-right">Student No</label>
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <p class="form-control-static text-left">@Model.ApplicationId</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-4 col-form-label text-right">Email</label>
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <p class="form-control-static text-left">@Model.SchoolEmail</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-4 col-form-label text-right">Phone</label>
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <p class="form-control-static text-left">@Model.PrimaryMobileNo</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*modal personal*@
+
+@await Html.PartialAsync("_partials/_EditPersonal");
+
+@*end of modal*@
+
+@*modal programme*@
+
+@await Html.PartialAsync("_partials/_EditProgramme");
+
+@*end of modal*@
+
+@*modal of documents*@
+
+@await Html.PartialAsync("_partials/_EditDocument");
+
+@*end of modal*@
+
+<script>
+    $(document).ready(function () {
+        $('.card.card-wizard').addClass('active');
+        // Initialise the wizard when DomContent
+        demo.initNowUiWizard();
+    });
+
+    function myFunction() {
+        var dots = document.getElementById("dots");
+        var moreText = document.getElementById("more");
+        var btnText = document.getElementById("myBtn");
+
+        if (dots.style.display === "none") {
+            dots.style.display = "inline";
+            btnText.innerHTML = "Read more";
+            moreText.style.display = "none";
+        } else {
+            dots.style.display = "none";
+            btnText.innerHTML = "Read less";
+            moreText.style.display = "inline";
+        }
+    }
+
+    $("#Gender").change(function () {
+        var value = $("#Gender :selected").val();
+        console.log(value);
+        switch (value) {
+            case "Male":
+                $("option[value='Mrs']").hide();
+                $("option[value='Miss']").hide();
+                $("option[value='Mr']").show();
+                $("option[value='Rev']").show();
+                break;
+            case "Female":
+                $("option[value='Mrs']").show();
+                $("option[value='Miss']").show();
+                $("option[value='Mr']").hide();
+                $("option[value='Rev']").show();
+                break;
+            default:
+            // code block
+        }
+    })
+
+    $("#Title").change(function () {
+        var value = $("#Title :selected").val();
+        console.log(value);
+        switch (value) {
+            case "Mr":
+                $("option[value='Female']").hide();
+                $("option[value='Male']").show();
+                break;
+            case "Mrs":
+                $("option[value='Female']").show();
+                $("option[value='Male']").hide();
+                break;
+            case "Miss":
+                $("option[value='Female']").show();
+                $("option[value='Male']").hide();
+                break;
+            case "Rev":
+                $("option[value='Male']").show();
+                $("option[value='Female']").show();
+                break;
+            default:
+            // code block
+        }
+    })
+
+</script>
