@@ -1,0 +1,60 @@
+﻿<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="text-primary">
+                <tr>
+                    <th>
+                        Department Name
+                    </th>
+                    <th>
+                        Faculty Name
+                    </th>
+                    <th>
+                        College Name
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var department in ViewBag.departments)
+                {
+                    <tr>
+                        <td>
+                            @department.DepartmentName
+                        </td>
+                        <td>
+                            @foreach (var faculty in ViewBag.faculties)
+                            {
+                                @if (department.FacultyId == faculty.FacultyId)
+                                {
+                                    @faculty.FacultyName
+                                }
+                            }
+                        </td>
+                        <td>
+                            @foreach (var college in ViewBag.colleges)
+                            {
+                                @if (department.CollegeId == college.CollegeId)
+                                {
+                                    @college.CollegeName
+                                }
+                            }
+                        </td>
+                        <td class="text-right">
+                            <button onclick="editDepartment('@department.DepartmentName, @department.CollegeId')" class="btn btn-round btn-info btn-icon btn-sm like" data-toggle="modal" data-target="#edit-department"><i class="now-ui-icons users_single-02"></i></button>
+                            <button class="btn btn-round btn-danger btn-icon btn-sm remove"><i class="fa fa-times"></i></button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    function editDepartment(dept, colId) {
+        $('#DepartmentName').val(dept);
+        $('#CollegeId').val(colId);
+    }
+</script>

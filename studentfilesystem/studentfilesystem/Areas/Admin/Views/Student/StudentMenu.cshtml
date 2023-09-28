@@ -24,9 +24,9 @@
     .sec:hover {
         cursor: pointer;
         /*background-color: #141E30;*/
-        color: #ffffff;
-        border-bottom: 5px solid #141E30;
-        /*.info > .icon > .now-ui-icons
+/*        color: #ffffff;
+*//*        border-bottom: 5px solid #141E30;
+*/        /*.info > .icon > .now-ui-icons
         {
             color: #ffffff;
 
@@ -118,10 +118,6 @@
                 <div class="tab-pane active" id="link7">
                     <div class="card-body">
                         <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
-                            <button class="btn btn-primary btn-round float-right" data-toggle="modal" data-target="#edit-personal">
-                                Edit Personal Details
-                                <i class="now-ui-icons ui-2_settings-90"></i>
-                            </button>
                             <div class="card card-plain">
                                 <div class="card-header" role="tab" id="headingOne">
                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -208,7 +204,7 @@
                             </div>
                             <div class="card card-plain">
                                 <div class="card-header" role="tab" id="headingTwo">
-                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <a class="collapsed" data-toggle="collapse show" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                         Address Information
                                         <i class="now-ui-icons arrows-1_minimal-down"></i>
                                     </a>
@@ -300,7 +296,7 @@
                             </div>
                             <div class="card card-plain">
                                 <div class="card-header" role="tab" id="headingThree">
-                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    <a class="collapsed" data-toggle="collapse show" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                         Religious Information
                                         <i class="now-ui-icons arrows-1_minimal-down"></i>
                                     </a>
@@ -333,10 +329,6 @@
                     <div class="tab-pane active" id="link7">
                         <div class="card-body">
                             <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
-                                <button class="btn btn-primary btn-round float-right" data-toggle="modal" data-target="#edit-programme">
-                                    Select/Edit Programme
-                                    <i class="now-ui-icons ui-2_settings-90"></i>
-                                </button>
                                 <div class="card card-plain">
                                     <div class="card-header" role="tab" id="headingTwo">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -389,10 +381,6 @@
                 <div class="tab-pane fade" id="link9">
                     <div class="card-body">
                         <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
-                            <button class="btn btn-primary btn-round float-right" data-toggle="modal" data-target="#edit-document">
-                                Upload/Edit Documents
-                                <i class="now-ui-icons ui-2_settings-90"></i>
-                            </button>
                             <div class="card card-plain">
                                 <div class="card-header" role="tab" id="headingThree">
                                     <a data-toggle="collapse show" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
@@ -487,24 +475,6 @@
         </div>
     </div>
 </div>
-
-@*modal personal*@
-
-@await Html.PartialAsync("_partials/_EditPersonal");
-
-@*end of modal*@
-
-@*modal programme*@
-
-@await Html.PartialAsync("_partials/_EditProgramme");
-
-@*end of modal*@
-
-@*modal of documents*@
-
-@await Html.PartialAsync("_partials/_EditDocument");
-
-@*end of modal*@
 
 <script>
     $(document).ready(function () {

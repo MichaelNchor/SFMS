@@ -3679,8 +3679,8 @@ img {
 }
 
     .nav-pills .nav-item .nav-link, .nav-pills .nav-item .nav-link:hover {
-        background-color: #141e30;
-        color: #fff;
+        background-color: hsla(0,0%,87%,.3);
+        color: #000;
     }
 
         .nav-pills .nav-item .nav-link.active, .nav-pills .nav-item .nav-link.active:focus, .nav-pills .nav-item .nav-link.active:hover {

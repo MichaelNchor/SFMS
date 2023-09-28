@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using studentfilesystem.Areas.Admin.Data.Services;
 using studentfilesystem.Models;
 using Microsoft.AspNetCore.Identity;
+using studentfilesystem.Areas.User.Data.Services;
 
 namespace studentfilesystem
 {
@@ -76,6 +77,12 @@ namespace studentfilesystem
             });
 
             services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICollegeService, CollegeService>();
+            services.AddScoped<IFacultyService, FacultyService>();
+            services.AddScoped<IProgrammesService, ProgrammesService>();
+            services.AddScoped<IDepartmentService, DepartmentService>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
         }

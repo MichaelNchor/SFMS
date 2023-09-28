@@ -9,6 +9,7 @@ using studentfilesystem.Models;
 using studentfilesystem.Areas.Admin.Data.Services;
 using System.IO;
 using studentfilesystem.Controllers;
+using Microsoft.AspNetCore.Identity;
 
 namespace studentfilesystem.Areas.Admin.Controllers
 {
@@ -17,10 +18,12 @@ namespace studentfilesystem.Areas.Admin.Controllers
     public class StudentController : BaseController
     {
         private readonly IStudentService _service;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public StudentController(IStudentService service)
+        public StudentController(IStudentService service, UserManager<IdentityUser> userManager)
         {
             _service = service;
+            _userManager = userManager;
         }
 
         // GET: Student
@@ -31,10 +34,10 @@ namespace studentfilesystem.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult StudentMenu(int id)
+        public async Task<IActionResult> StudentMenu(int id)
         {
             var applicant = _service.GetApplicantById(id);
-            var documents = _service.GetDocuments();
+            var documents = _service.GetDocuments(id);
 
             ViewBag.Documents = documents;
 
@@ -47,59 +50,6 @@ namespace studentfilesystem.Areas.Admin.Controllers
                 Notify("", "Programmes Stage Complete", true, notificationType: NotificationType.success);
             }
             return View(applicant);
-        }
-
-        [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public ActionResult EditPersonal(int id, Application collection, string username)
-        {
-            try
-            {
-                _service.EditPersonal(id, collection, User.Identity.Name);
-                Notify("", "Edited Successfully", false, notificationType: NotificationType.success);
-                return RedirectToAction("StudentMenu", new { id = collection.ApplicationId });
-            }
-            catch(Exception ex)
-            {
-                Notify("", "Edit Failed", false, notificationType: NotificationType.error);
-                return RedirectToAction("StudentMenu", new { id = collection.ApplicationId });
-            }
-        }
-
-        [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public ActionResult EditProgramme(int id, Application collection, string username)
-        {
-            var applicant = _service.GetApplicantById(id);
-
-            try
-            {
-                _service.EditProgramme(id, collection, User.Identity.Name);
-                Notify("", "Edited Successfully", false, notificationType: NotificationType.success);
-                return RedirectToAction("StudentMenu", new { id = id });
-            }
-            catch
-            {
-                Notify("", "Edited Failed", false, notificationType: NotificationType.error);
-                return RedirectToAction("StudentMenu", new { id = id });
-            }
-        }
-
-        [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public ActionResult AddDocument(int id, Models.Document document, string username)
-        {
-            try
-            {
-                _service.AddDocument(id, document, User.Identity.Name);
-                Notify("", "Added Successfully", false, notificationType: NotificationType.success);
-                return RedirectToAction("StudentMenu", new { id = id });
-            }
-            catch (Exception ex)
-            {
-                Notify("", "Add Failed", false, notificationType: NotificationType.success);
-                return RedirectToAction("StudentMenu", new { id = id });
-            }
         }
 
         [HttpGet]
@@ -130,35 +80,6 @@ namespace studentfilesystem.Areas.Admin.Controllers
         {
             var results = _service.Search(text, startDate, endDate);
             return View(results);
-        }
-
-        // GET: Student/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Student/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Application collection)
-        {
-            try
-            {
-                _service.CreateApplicant(collection, User.Identity.Name);
-                // add modal on Admin/ route
-                Notify("","Application Created", false, notificationType: NotificationType.success);
-
-                return View();
-            }
-            catch
-            {
-                //Console.WriteLine("error: " + e);
-                // modal for failed to add applicant
-                Notify("","Application Failed", true, notificationType: NotificationType.error);
-
-                return View();
-            }
         }
 
         // POST: Student/Delete/5

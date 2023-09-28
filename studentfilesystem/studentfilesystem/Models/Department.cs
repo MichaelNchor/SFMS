@@ -10,9 +10,9 @@ namespace studentfilesystem.Models
             Programme = new HashSet<Programme>();
         }
 
-        public string DepartmentId { get; set; }
-        public string FacultyId { get; set; }
-        public string CollegeId { get; set; }
+        public int DepartmentId { get; set; }
+        public int FacultyId { get; set; }
+        public int CollegeId { get; set; }
         public string DepartmentName { get; set; }
 
         public virtual Faculty Faculty { get; set; }

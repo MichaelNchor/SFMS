@@ -1,0 +1,189 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="panel-header panel-header-sm">
+</div>
+<div class="content">
+    <div class="row">
+        <div class="card ">
+            <div class="card-header ">
+                <h4 class="card-title">Stream Setup</h4>
+            </div>
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-md-4">
+                        <ul class="nav nav-pills nav-pills-primary flex-column" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#link4" role="tablist">
+                                    College
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#link5" role="tablist">
+                                    Faculty
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#link6" role="tablist">
+                                    Department
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#link7" role="tablist">
+                                    Programme
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="link4">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                    <button class="btn btn-primary btn-round float-right" data-toggle="modal" data-target="#add-college">
+                                        Add College
+                                        <i class="now-ui-icons ui-2_settings-90"></i>
+                                    </button>
+                                    </div>
+                                    @await Html.PartialAsync("_partials/College/View");
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="link5">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <button class="btn btn-primary btn-round float-right" data-toggle="modal" data-target="#add-faculty">
+                                            Add Faculty
+                                            <i class="now-ui-icons ui-2_settings-90"></i>
+                                        </button>
+                                    </div>
+                                    @await Html.PartialAsync("_partials/Faculty/View");
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="link6">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                    <button class="btn btn-primary btn-round float-right" data-toggle="modal" data-target="#add-department">
+                                        Add Department
+                                        <i class="now-ui-icons ui-2_settings-90"></i>
+                                    </button>
+                                    </div>
+                                    @await Html.PartialAsync("_partials/Department/View");
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="link7">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                    <button class="btn btn-primary btn-round float-right" data-toggle="modal" data-target="#add-programme">
+                                        Add Programme
+                                        <i class="now-ui-icons ui-2_settings-90"></i>
+                                    </button>
+                                    </div>
+                                    @await Html.PartialAsync("_partials/Programme/View");
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*modal personal*@
+
+@await Html.PartialAsync("_partials/College/Add");
+
+@*end of modal*@
+
+@*modal programme*@
+
+@await Html.PartialAsync("_partials/Faculty/Add");
+
+@*end of modal*@
+
+@*modal of documents*@
+
+@await Html.PartialAsync("_partials/Department/Add");
+
+@*end of modal*@
+
+@*modal of documents*@
+
+@await Html.PartialAsync("_partials/Programme/Add");
+
+@*end of modal*@
+
+@*modal personal*@
+
+@await Html.PartialAsync("_partials/College/Edit");
+
+@*end of modal*@
+
+@*modal programme*@
+
+@await Html.PartialAsync("_partials/Faculty/Edit");
+
+@*end of modal*@
+
+@*modal of documents*@
+
+@await Html.PartialAsync("_partials/Department/Edit");
+
+@*end of modal*@
+
+@*modal of documents*@
+
+@await Html.PartialAsync("_partials/Programme/Edit");
+
+@*end of modal*@
+
+<script>
+    (function ($) {
+        "use strict";
+        /*----------------------------
+     counterUp js active
+    ------------------------------ */
+        $('.counter').counterUp({
+            delay: 10,
+            time: 1000
+        });
+
+        $('.remove').click(function (e) {
+            e.preventDefault();
+            dialogue('warning-message-and-cancel', this.id);
+        })
+    })(jQuery);
+
+
+    function dialogue(type, id) {
+        if (type == 'warning-message-and-cancel') {
+            const swalWithBootstrapButtons = Swal.mixin({ confirmButtonClass: 'btn btn-primary', cancelButtonClass: 'btn btn-danger', buttonsStyling: true, })
+            swalWithBootstrapButtons.fire({ title: 'Are you sure?', text: "You won't be able to revert this!", type: 'warning', showCancelButton: true, confirmButtonText: 'Confirm Delete', cancelButtonText: 'No, cancel!', reverseButtons: true })
+                .then((result) => {
+                    if (result.value) {
+                        //post
+                        var url = 'Student/Delete/' + id;
+                        console.log(url)
+                        $.ajax({
+                            type: 'post',
+                            url: url,
+                            success() {
+                                $('#' + id).remove();
+                                swalWithBootstrapButtons.fire('Deleted!', 'Applicant has been deleted.', 'success')
+                            },
+                            error() {
+                                swalWithBootstrapButtons.fire('Delete Failed!', 'c', 'error')
+                            }
+                        })
+                    } else if (result.dismiss === Swal.DismissReason.cancel) { swalWithBootstrapButtons.fire('Cancelled', 'Applicant was not deleted.', 'error') }
+                })
+        }
+    }
+</script>
+
+

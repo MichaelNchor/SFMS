@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\UITS-PC\\source\\repos\\studentfilesystem\\studentfilesystem\\studentfilesystem.csproj": {}
+    "c:\\Users\\UITS-PC\\source\\repos\\studentfilesystem\\studentfilesystem\\studentfilesystem.csproj": {}
   },
   "projects": {
-    "C:\\Users\\UITS-PC\\source\\repos\\studentfilesystem\\studentfilesystem\\studentfilesystem.csproj": {
+    "c:\\Users\\UITS-PC\\source\\repos\\studentfilesystem\\studentfilesystem\\studentfilesystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\UITS-PC\\source\\repos\\studentfilesystem\\studentfilesystem\\studentfilesystem.csproj",
+        "projectUniqueName": "c:\\Users\\UITS-PC\\source\\repos\\studentfilesystem\\studentfilesystem\\studentfilesystem.csproj",
         "projectName": "studentfilesystem",
-        "projectPath": "C:\\Users\\UITS-PC\\source\\repos\\studentfilesystem\\studentfilesystem\\studentfilesystem.csproj",
+        "projectPath": "c:\\Users\\UITS-PC\\source\\repos\\studentfilesystem\\studentfilesystem\\studentfilesystem.csproj",
         "packagesPath": "C:\\Users\\UITS-PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\UITS-PC\\source\\repos\\studentfilesystem\\studentfilesystem\\obj\\",
+        "outputPath": "c:\\Users\\UITS-PC\\source\\repos\\studentfilesystem\\studentfilesystem\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

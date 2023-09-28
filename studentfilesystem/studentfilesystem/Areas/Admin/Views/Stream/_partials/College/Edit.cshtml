@@ -1,0 +1,27 @@
+﻿<div class="modal fade" id="edit-college" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notice">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="now-ui-icons ui-1_simple-remove"></i>
+                </button>
+                <h4 class="title title-up">Edit College</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-controller="Stream" asp-action="EditCollege">
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">College Name</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <input type="text" id="CollegeName" class="form-control" name="CollegeName" value="@ViewBag.selectedCollege">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary float-right">Save Changes</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>

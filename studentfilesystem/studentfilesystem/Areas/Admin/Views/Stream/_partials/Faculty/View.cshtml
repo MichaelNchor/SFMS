@@ -1,0 +1,41 @@
+﻿<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="text-primary">
+                <tr>
+                    <th>
+                        Faculty Name
+                    </th>
+                    <th>
+                        College Name
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var faculty in ViewBag.faculties)
+                {
+                    <tr>
+                        <td>
+                            @faculty.FacultyName
+                        </td>
+                        <td>
+                            @foreach(var college in ViewBag.colleges){
+                                @if (faculty.CollegeId == college.CollegeId)
+                                {
+                                    @college.CollegeName
+                                }
+                            }
+                        </td>
+                        <td class="text-right">
+                            <button class="btn btn-round btn-info btn-icon btn-sm like" data-toggle="modal" data-target="#edit-faculty"><i class="now-ui-icons users_single-02"></i></button>
+                            <button class="btn btn-round btn-danger btn-icon btn-sm remove"><i class="fa fa-times"></i></button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

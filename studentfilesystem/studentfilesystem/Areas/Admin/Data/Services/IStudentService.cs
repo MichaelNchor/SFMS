@@ -12,13 +12,10 @@ namespace studentfilesystem.Areas.Admin.Data.Services
     public interface IStudentService
     {
         IEnumerable<Application> GetApplicants();
-        IEnumerable<Models.Document> GetDocuments();
+        IEnumerable<Models.Document> GetDocuments(int id);
         Application GetApplicantById(int id);
-        void CreateApplicant(Application collection, string username);
+        Application GetApplicationByUserId(string userid);
         void DeleteApplicant(int id);
-        void EditPersonal(int id, Application collection, string username);
-        void EditProgramme(int id, Application collection, string username);
-        void AddDocument(int id, Models.Document document, string username);
         IEnumerable<Application> Search(string text = "", int startDate = 1900, int endDate = 2099);
     }
 }

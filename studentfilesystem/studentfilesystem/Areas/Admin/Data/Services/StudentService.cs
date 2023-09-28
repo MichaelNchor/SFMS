@@ -38,27 +38,13 @@ namespace studentfilesystem.Areas.Admin.Data.Services
             return data;
         }
 
-        public void CreateApplicant(Application collection, string username)
+        public Application GetApplicationByUserId(string userid)
         {
-            collection = SaveImage(collection);
-            var removeString = "C:\\Users\\UITS-PC\\source\\repos\\studentfilesystem\\studentfilesystem\\wwwroot";
-            collection.PassportPath = collection.PassportPath.Replace(removeString, "");
+            var data = _dbcontext.UserApplication.Find(userid);
 
-            collection.Status = 0;
-            collection.CreatedBy = username;
-            collection.CreatedOn = DateTime.Now;
-            _dbcontext.Application.Add(collection);
-            _dbcontext.SaveChanges();
-        }
+            Application app = _dbcontext.Application.Find(data.ApplicationId);
 
-        public void AddDocument(int id, Models.Document document, string username)
-        {
-            document = SaveDocument(document);
-            document.CreatedOn = DateTime.Now;
-            document.CreatedBy = username;
-            document.ApplicationId = id;
-            _dbcontext.Document.Add(document);
-            _dbcontext.SaveChanges();
+            return app;
         }
 
         public IEnumerable<Application> Search(string text = "", int startDate = 1900, int endDate = 2099)
@@ -108,36 +94,6 @@ namespace studentfilesystem.Areas.Admin.Data.Services
             _dbcontext.SaveChanges();
         }
 
-        public void EditPersonal(int id, Application collection, string username)
-        {
-            if (collection.PassportImage != null)
-            {
-                collection = SaveImage(collection);
-                var removeString = "C:\\Users\\UITS-PC\\source\\repos\\studentfilesystem\\studentfilesystem\\wwwroot";
-                collection.PassportPath = collection.PassportPath.Replace(removeString, "");
-            }
-
-            collection.UpdateBy = username;
-            collection.UpdatedOn = DateTime.Now;
-
-            _dbcontext.Entry(collection).State = EntityState.Modified;
-            _dbcontext.SaveChanges();
-        }
-
-        public void EditProgramme(int id, Application application, string username)
-        {
-            var applicant = _dbcontext.Application.Find(id);
-            applicant.AcademicYear = application.AcademicYear;
-            applicant.ProgrammeChoice1 = application.ProgrammeChoice1;
-            applicant.ProgrammeChoice2 = application.ProgrammeChoice2;
-            applicant.ProgrammeChoice3 = application.ProgrammeChoice3;
-            applicant.Type = application.Type;
-            applicant.Status = 1;
-            applicant.UpdatedOn = DateTime.Now;
-            applicant.UpdateBy = username;
-            _dbcontext.SaveChanges();
-        }
-
         public List<int> GetDatesInRange(int startDate, int endDate)
         {
             List<int> datesInRange = new List<int>();
@@ -156,41 +112,9 @@ namespace studentfilesystem.Areas.Admin.Data.Services
             return datesInRange;
         }
 
-        public Application SaveImage(Application collection)
+        public IEnumerable<Models.Document> GetDocuments(int id)
         {
-            string wwwrootpath = _hostEnvironment.WebRootPath;
-            //string imageName = Path.GetFileNameWithoutExtension(collection.PassportImage.FileName);
-            string extension = Path.GetExtension(collection.PassportImage.FileName);
-            collection.PassportTitle = collection.Surname + collection.OtherNames + DateTime.Now.ToString("yymmssfff") + extension;
-            collection.PassportPath = Path.Combine(wwwrootpath + "/images/applicants/", collection.PassportTitle);
-            //collection.PassportPath = Path.Combine("/images/applicants/", collection.PassportTitle);
-
-            using (var fileStream = new FileStream(collection.PassportPath, FileMode.Create))
-            {
-                collection.PassportImage.CopyTo(fileStream);
-            }
-
-            return collection;
-        }
-
-        public Models.Document SaveDocument(Models.Document document)
-        {
-            string wwwrootpath = _hostEnvironment.WebRootPath;
-            string extension = Path.GetExtension(document.DocumentFile.FileName);
-            document.Name = document.Type + DateTime.Now.ToString("yymmssfff") + extension;
-            document.DocumentPath = Path.Combine(wwwrootpath + "/documents/applicants/", document.Name);
-
-            using (var fileStream = new FileStream(document.DocumentPath, FileMode.Create))
-            {
-                document.DocumentFile.CopyTo(fileStream);
-            }
-
-            return document;
-        }
-
-        public IEnumerable<Models.Document> GetDocuments()
-        {
-            return _dbcontext.Document.ToList();
+            return _dbcontext.Document.Where(d => d.ApplicationId == id);
         }
     }
 }

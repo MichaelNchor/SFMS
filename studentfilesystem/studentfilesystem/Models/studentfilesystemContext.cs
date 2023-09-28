@@ -18,6 +18,7 @@ namespace studentfilesystem.Models
         }
 
         public virtual DbSet<Application> Application { get; set; }
+        public virtual DbSet<UserApplication> UserApplication { get; set; }
         //public virtual DbSet<ApplicationUser> ApplicationUser { get; set; }
         //public virtual DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
         //public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
@@ -255,14 +256,20 @@ namespace studentfilesystem.Models
                     .HasName("PK4")
                     .ForSqlServerIsClustered(false);
 
-                entity.Property(e => e.CollegeId)
-                    .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .ValueGeneratedNever();
+                entity.Property(e => e.CollegeId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.CollegeName)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<UserApplication>(entity =>
+            {
+                entity.HasKey(e => e.UserId)
+                    .HasName("PK9")
+                    .ForSqlServerIsClustered(false);
+
+                entity.Property(e => e.ApplicationId).HasColumnName("ApplicationId");
             });
 
             modelBuilder.Entity<Department>(entity =>
@@ -271,9 +278,7 @@ namespace studentfilesystem.Models
                     .HasName("PK5")
                     .ForSqlServerIsClustered(false);
 
-                entity.Property(e => e.DepartmentId)
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
+                entity.Property(e => e.DepartmentId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.FacultyId)
                     .HasMaxLength(10)
@@ -344,9 +349,7 @@ namespace studentfilesystem.Models
                     .HasName("PK6")
                     .ForSqlServerIsClustered(false);
 
-                entity.Property(e => e.FacultyId)
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
+                entity.Property(e => e.FacultyId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.CollegeId)
                     .HasMaxLength(10)
@@ -369,9 +372,7 @@ namespace studentfilesystem.Models
                     .HasName("PK7")
                     .ForSqlServerIsClustered(false);
 
-                entity.Property(e => e.ProgrammeId)
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
+                entity.Property(e => e.ProgrammeId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.DepartmentId)
                     .HasMaxLength(10)
@@ -389,15 +390,15 @@ namespace studentfilesystem.Models
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ProgrammeName)
-                    .HasMaxLength(50)
+                entity.Property(e => e.ProgrammeTag)
+                    .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.Department)
-                    .WithMany(p => p.Programme)
-                    .HasForeignKey(d => new { d.DepartmentId, d.FacultyId, d.CollegeId })
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("RefDepartment9");
+                //entity.HasOne(d => d.Department)
+                //    .WithMany(p => p.Programme)
+                //    .HasForeignKey(d => new { d.DepartmentId, d.FacultyId, d.CollegeId })
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("RefDepartment9");
             });
         }
     }

@@ -63,6 +63,57 @@ namespace studentfilesystem.Migrations.studentfilesystem
                     b.ToTable("AspNetRoleClaims");
                 });
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AccessFailedCount");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("EmailConfirmed");
+
+                    b.Property<bool>("LockoutEnabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("PasswordHash");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("SecurityStamp");
+
+                    b.Property<bool>("TwoFactorEnabled");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -271,62 +322,11 @@ namespace studentfilesystem.Migrations.studentfilesystem
                     b.ToTable("Application");
                 });
 
-            modelBuilder.Entity("studentfilesystem.Models.ApplicationUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AccessFailedCount");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256);
-
-                    b.Property<bool>("EmailConfirmed");
-
-                    b.Property<bool>("LockoutEnabled");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("PasswordHash");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<bool>("PhoneNumberConfirmed");
-
-                    b.Property<string>("SecurityStamp");
-
-                    b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
-                });
-
             modelBuilder.Entity("studentfilesystem.Models.College", b =>
                 {
-                    b.Property<string>("CollegeId")
-                        .HasMaxLength(10)
-                        .IsUnicode(false);
+                    b.Property<int>("CollegeId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CollegeName")
                         .HasMaxLength(50)
@@ -341,15 +341,15 @@ namespace studentfilesystem.Migrations.studentfilesystem
 
             modelBuilder.Entity("studentfilesystem.Models.Department", b =>
                 {
-                    b.Property<string>("DepartmentId")
+                    b.Property<int>("DepartmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("FacultyId")
                         .HasMaxLength(10)
                         .IsUnicode(false);
 
-                    b.Property<string>("FacultyId")
-                        .HasMaxLength(10)
-                        .IsUnicode(false);
-
-                    b.Property<string>("CollegeId")
+                    b.Property<int>("CollegeId")
                         .HasMaxLength(10)
                         .IsUnicode(false);
 
@@ -400,6 +400,10 @@ namespace studentfilesystem.Migrations.studentfilesystem
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime");
 
+                    b.Property<string>("UserId")
+                        .HasMaxLength(450)
+                        .IsUnicode(false);
+
                     b.HasKey("DocumentId")
                         .HasName("PK8")
                         .HasAnnotation("SqlServer:Clustered", false);
@@ -411,11 +415,11 @@ namespace studentfilesystem.Migrations.studentfilesystem
 
             modelBuilder.Entity("studentfilesystem.Models.Faculty", b =>
                 {
-                    b.Property<string>("FacultyId")
-                        .HasMaxLength(10)
-                        .IsUnicode(false);
+                    b.Property<int>("FacultyId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CollegeId")
+                    b.Property<int>("CollegeId")
                         .HasMaxLength(10)
                         .IsUnicode(false);
 
@@ -434,27 +438,29 @@ namespace studentfilesystem.Migrations.studentfilesystem
 
             modelBuilder.Entity("studentfilesystem.Models.Programme", b =>
                 {
-                    b.Property<string>("ProgrammeId")
+                    b.Property<int>("ProgrammeId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DepartmentId")
                         .HasMaxLength(10)
                         .IsUnicode(false);
 
-                    b.Property<string>("DepartmentId")
+                    b.Property<int>("FacultyId")
                         .HasMaxLength(10)
                         .IsUnicode(false);
 
-                    b.Property<string>("FacultyId")
-                        .HasMaxLength(10)
-                        .IsUnicode(false);
-
-                    b.Property<string>("CollegeId")
+                    b.Property<int>("CollegeId")
                         .HasMaxLength(10)
                         .IsUnicode(false);
 
                     b.Property<string>("ProgrammeName")
-                        .HasMaxLength(50)
+                        .HasMaxLength(255)
                         .IsUnicode(false);
 
-                    b.Property<string>("ProgrammeTag");
+                    b.Property<string>("ProgrammeTag")
+                        .HasMaxLength(255)
+                        .IsUnicode(false);
 
                     b.HasKey("ProgrammeId", "DepartmentId", "FacultyId", "CollegeId")
                         .HasName("PK7")
@@ -463,6 +469,21 @@ namespace studentfilesystem.Migrations.studentfilesystem
                     b.HasIndex("DepartmentId", "FacultyId", "CollegeId");
 
                     b.ToTable("Programme");
+                });
+
+            modelBuilder.Entity("studentfilesystem.Models.UserApplication", b =>
+                {
+                    b.Property<string>("UserId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ApplicationId")
+                        .HasColumnName("ApplicationId");
+
+                    b.HasKey("UserId")
+                        .HasName("PK9")
+                        .HasAnnotation("SqlServer:Clustered", false);
+
+                    b.ToTable("UserApplication");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -475,7 +496,7 @@ namespace studentfilesystem.Migrations.studentfilesystem
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("studentfilesystem.Models.ApplicationUser")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -483,7 +504,7 @@ namespace studentfilesystem.Migrations.studentfilesystem
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("studentfilesystem.Models.ApplicationUser")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -496,7 +517,7 @@ namespace studentfilesystem.Migrations.studentfilesystem
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("studentfilesystem.Models.ApplicationUser")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -504,7 +525,7 @@ namespace studentfilesystem.Migrations.studentfilesystem
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("studentfilesystem.Models.ApplicationUser")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -536,10 +557,10 @@ namespace studentfilesystem.Migrations.studentfilesystem
 
             modelBuilder.Entity("studentfilesystem.Models.Programme", b =>
                 {
-                    b.HasOne("studentfilesystem.Models.Department", "Department")
+                    b.HasOne("studentfilesystem.Models.Department")
                         .WithMany("Programme")
                         .HasForeignKey("DepartmentId", "FacultyId", "CollegeId")
-                        .HasConstraintName("RefDepartment9");
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

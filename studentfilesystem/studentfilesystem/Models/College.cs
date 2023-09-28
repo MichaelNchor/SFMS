@@ -10,7 +10,7 @@ namespace studentfilesystem.Models
             Faculty = new HashSet<Faculty>();
         }
 
-        public string CollegeId { get; set; }
+        public int CollegeId { get; set; }
         public string CollegeName { get; set; }
 
         public virtual ICollection<Faculty> Faculty { get; set; }

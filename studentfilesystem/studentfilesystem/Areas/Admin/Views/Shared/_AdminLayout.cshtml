@@ -3,7 +3,7 @@
 @inject UserManager<IdentityUser> UserManager
 
 @{
-    ViewData["Title"] = "Dashboard";
+    ViewData["Title"] = "Admin";
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -139,21 +139,21 @@
                                         <p>Search Applicant</p>
                                     </a>
                                 </li>
-                                <li>
-                                    <a asp-area="Admin" asp-controller="Student" asp-action="Create">
-                                        <i class="now-ui-icons users_single-02"></i>
-                                        <p>Register Applicant</p>
-                                    </a>
-                                </li>
                             </ul>
                         </div>
                     </li>
                     <li>
+                        <a asp-area="Admin" asp-controller="Stream" asp-action="Index">
+                            <i class="now-ui-icons business_bank"></i>
+                            <p>Streams Setup</p>
+                        </a>
+                    </li>
+@*                    <li>
                         <a href="./map.html">
                             <i class="now-ui-icons gestures_tap-01"></i>
                             <p>How to use</p>
                         </a>
-                    </li>
+                    </li>*@
                     @*<li>
            <a href="./notifications.html">
                 <i class="now-ui-icons ui-1_bell-53"></i>
